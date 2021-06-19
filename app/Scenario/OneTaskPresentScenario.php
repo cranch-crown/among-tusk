@@ -4,21 +4,32 @@
 namespace App\Scenario;
 
 
-use App\Factories\TaskFactory;
+use App\Factories\TaskCollectionFactory;
 use App\Http\Services\AmongTuskSpreadSheetClient;
 use App\Models\Task;
 
 class OneTaskPresentScenario
 {
-    public function __construct(private AmongTuskSpreadSheetClient $client, private TaskFactory $factory)
+    public function __construct(
+        private AmongTuskSpreadSheetClient $client,
+        private TaskCollectionFactory $factory
+    )
     {
     }
 
     public function get(): Task
     {
-        $this->client->getOneTaskDataAtRandom();
+        $taskText = session('task');
 
-        $task = $this->factory->create($this->client->getOneTaskDataAtRandom());
+        if ($taskText) {
+            $task = new Task($taskText);
+        } else {
+            $collection = $this->factory->createFromTaskDataArray($this->client->getAllTaskText());
+            $task = $collection->getOneAtRandom();
+        }
+
+        session(['task' => $task->toString()]);
+
         return $task;
     }
 }

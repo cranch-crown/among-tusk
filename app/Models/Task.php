@@ -6,19 +6,16 @@ namespace App\Models;
 
 class Task
 {
-    private $description;
-
     /**
      * Task constructor.
-     * @param string $description
+     * @param string $text
      */
-    public function __construct(string $description)
+    public function __construct(private string $text)
     {
-        $this->description = $description;
     }
 
     public function toString(): string
     {
-        return $this->description;
+        return $this->text;
     }
 }

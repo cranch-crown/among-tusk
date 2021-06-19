@@ -34,10 +34,6 @@ class AmongTuskSpreadSheetClient
         return $googleClient;
     }
 
-    public function getOneTaskDataAtRandom(): string
-    {
-    }
-
     /**
      * スプレッドシートのヘッダ行数
      * @return int
@@ -56,7 +52,7 @@ class AmongTuskSpreadSheetClient
         return $data[0];
     }
 
-    private function getAllTask(): array
+    public function getAllTaskText(): array
     {
         $firstDataRow = $this->getHeaderLineCount() + 1;
         $fistDataCell = self::TASK_DATA_COLUMN . (string)$firstDataRow;

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RootPageController;
-use App\Http\Controllers\TaskPageController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +17,5 @@ use App\Http\Controllers\TaskPageController;
 
 Route::get('/', RootPageController::class)->name('root');
 
-Route::get('/task', TaskPageController::class)->name('task');
+Route::get('/task', [TaskController::class, 'task'])->name('task');
+Route::get('/raffle', [TaskController::class, 'raffle'])->name('raffle');
