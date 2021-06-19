@@ -12,7 +12,6 @@ class AmongTuskSpreadSheetClient
     const TASK_SHEET_NAME = '縛り管理';
     const API_DATA_SHEET_NAME = 'API用データ';
     const HEADER_COUNTING_CELL = 'A1';
-    const TASK_COUNTING_CELL = 'A2';
     const TASK_DATA_COLUMN = 'A';
 
     private \Google_Service_Sheets $spreadSheetService;
@@ -47,9 +46,8 @@ class AmongTuskSpreadSheetClient
 
     public function getAllTaskCount(): int
     {
-        $taskCountingRange = SpreadSheetRangeFacade::create(self::API_DATA_SHEET_NAME, self::TASK_COUNTING_CELL, self::TASK_COUNTING_CELL);
-        $data = $this->get($taskCountingRange);
-        return $data[0];
+        $data = $this->getAllTaskText();
+        return count($data);
     }
 
     public function getAllTaskText(): array
