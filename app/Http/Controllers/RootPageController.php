@@ -4,11 +4,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Services\AmongTuskSpreadSheetClient;
+
 class RootPageController extends Controller
 {
-    public function __invoke()
+    public function __invoke(AmongTuskSpreadSheetClient $client)
     {
-        $n = 1;
-        return view('root', compact('n'));
+        return view('root', ['taskCount' => $client->getAllTaskCount()]);
     }
 }

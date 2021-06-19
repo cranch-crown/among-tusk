@@ -4,10 +4,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Scenario\OneTaskPresentScenario;
+
 class TaskPageController extends Controller
 {
-    public function __invoke()
+    public function __invoke(OneTaskPresentScenario $scenario)
     {
-        return view('task');
+        $task = $scenario->get();
+        return view('task', compact('task'));
     }
 }
