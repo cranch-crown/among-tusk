@@ -1,0 +1,15 @@
+version: '3'
+services:
+  among-tusk:
+    build:
+      context: ./.docker
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - .:/var/www
+      - ./.docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./.docker/logs/access.log:/var/log/apache2/access.log
+      - ./.docker/logs/error.log:/var/log/apache2/error.log
+      - ./.docker/apache/apache2.conf:/etc/apache2/apache2.conf
+      - ./.docker/apache/sites-enabled/amongtusk-vhost.conf:/etc/apache2/sites-enabled/amongtusk-vhost.conf
