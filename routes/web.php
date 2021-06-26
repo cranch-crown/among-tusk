@@ -19,3 +19,8 @@ Route::get('/', RootPageController::class)->name('root');
 
 Route::get('/task', [TaskController::class, 'task'])->name('task');
 Route::get('/raffle', [TaskController::class, 'raffle'])->name('raffle');
+
+// リリースノート
+Route::get('/releases', function () {
+    return view('release');
+})->name('release');
